@@ -4,6 +4,7 @@ import org.usfirst.frc.team1160.robot.OI;
 import org.usfirst.frc.team1160.robot.RobotMap;
 import org.usfirst.frc.team1160.robot.commands.MecanumDrive;
 
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 
@@ -13,12 +14,20 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
  */
 public abstract class DriveTrain extends PIDSubsystem implements RobotMap{
     
-    
+    protected Encoder ebl, ebr, efl, efr;
     private double maxV, flT, frT, blT, brT;
     protected Talon fl, fr, bl, br;
+    protected PID_BL pbl;
+    protected PID_BR pbr;
+    protected PID_FL pfl;
+    protected PID_FR pfr;
 
     protected DriveTrain(String name, double p, double i, double d) {
         super(name, p, i, d);
+        pbl = new PID_BL();
+        pbr = new PID_BR();
+        pfl = new PID_FL();
+        pfr = new PID_FR();
     }
 
     //Drive Code for mecanum wheels
@@ -52,19 +61,31 @@ public abstract class DriveTrain extends PIDSubsystem implements RobotMap{
   	 }
   	 
   	 public void forward(double distance){
-  		getPIDController().setSetpoint(distance);
+  		pbl.setSetpoint(distance);
+  		pbr.setSetpoint(distance);
+  		pfl.setSetpoint(distance);
+  		pfr.setSetpoint(distance);
   	 }
   	 
   	 public void right(double distance){
-  		getPIDController().setSetpoint(distance);
+   		pbl.setSetpoint(-distance);
+   		pbr.setSetpoint(distance);
+   		pfl.setSetpoint(distance);
+   		pfr.setSetpoint(-distance);
   	 }
   	 
   	 public void left(double distance){
-  		getPIDController().setSetpoint(distance);
+   		pbl.setSetpoint(distance);
+   		pbr.setSetpoint(-distance);
+   		pfl.setSetpoint(-distance);
+   		pfr.setSetpoint(distance);
   	 }
   	 
   	 public void backward(double distance){
-  		getPIDController().setSetpoint(distance);
+   		pbl.setSetpoint(-distance);
+   		pbr.setSetpoint(-distance);
+   		pfl.setSetpoint(-distance);
+   		pfr.setSetpoint(-distance);
   	 }
      
 }

@@ -9,13 +9,13 @@ import edu.wpi.first.wpilibj.Talon;
 
 public class PID_BL extends DriveTrain implements RobotMap{
 	
-	//set ports
-	Encoder encode = new Encoder(PID_ENCODER_BL_A, PID_ENCODER_BL_B, false, EncodingType.k4X);
 	
 	 public PID_BL(){
 		 //Setting things
 		 super("PID_BL", 1.0, 0.0, 0.0);
 		 bl = new Talon(DT_MOTOR_BL);
+		 ebl = new Encoder(PID_ENCODER_BL_A, PID_ENCODER_BL_B, false, EncodingType.k4X);
+		 ebl.setDistancePerPulse(DISTANCE_PER_PULSE);
 		 getPIDController().enable();
 		 //Set PID error tolerance
 		 setAbsoluteTolerance(0.05);
@@ -26,7 +26,7 @@ public class PID_BL extends DriveTrain implements RobotMap{
 	 
 	 //Set PID value return method
 	 protected double returnPIDInput(){
-		 return encode.get();
+		 return ebl.get();
 	 }
 	 
 	 //Write the motor's PID Output
