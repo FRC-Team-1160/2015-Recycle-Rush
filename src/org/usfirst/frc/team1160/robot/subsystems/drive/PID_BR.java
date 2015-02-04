@@ -9,17 +9,23 @@ import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 
 public class PID_BR extends DriveTrain implements RobotMap{
 	
-		
-	 public PID_BR(){
+	private static PID_BR instance;
+	
+	public static PID_BR getInstance(){
+		if(instance == null)
+			instance = new PID_BR();
+		return instance;
+	}	
+	
+	 private PID_BR(){
 		 //Setting things
 		 super("PID_BR", 1.0, 0.0, 0.0);
 		 br = new Talon(DT_MOTOR_BR);
-		 ebr = new Encoder(PID_ENCODER_BL_A, PID_ENCODER_BL_B, false, EncodingType.k4X);
+		 ebr = new Encoder(PID_ENCODER_BR_A, PID_ENCODER_BR_B, false, EncodingType.k4X);
 		 ebr.setDistancePerPulse(DISTANCE_PER_PULSE);
 		 getPIDController().enable();
 		 //Set PID error tolerance
 		 setAbsoluteTolerance(0.05);
-		 
 		 //Set PID to consider the Input as continuous
 		 getPIDController().setContinuous(true);	       
 	 }

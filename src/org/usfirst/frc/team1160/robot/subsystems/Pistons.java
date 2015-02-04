@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1160.robot.subsystems;
+/*package org.usfirst.frc.team1160.robot.subsystems;
 
 import org.usfirst.frc.team1160.robot.RobotMap;
 
@@ -32,4 +32,4 @@ public class Pistons extends Subsystem implements RobotMap{
         one.set(DoubleSolenoid.Value.kReverse);
     }
 
-}
+}*/

@@ -15,32 +15,20 @@ import edu.wpi.first.wpilibj.command.PIDSubsystem;
 public abstract class DriveTrain extends PIDSubsystem implements RobotMap{
     
     protected Encoder ebl, ebr, efl, efr;
-    private static double maxV, maxE, flT, frT, blT, brT;
-    protected static Talon fl, fr, bl, br;
-    protected static PID_BL pbl;
-    protected static PID_BR pbr;
-    protected static PID_FL pfl;
-    protected static PID_FR pfr;
+    private double maxV, maxE, flT, frT, blT, brT;
+    protected Talon fl, fr, bl, br;
+    public PID_BL pbl = PID_BL.getInstance();
+    public PID_BR pbr = PID_BR.getInstance();
+    public PID_FL pfl = PID_FL.getInstance();
+    public PID_FR pfr = PID_FR.getInstance();
 
     protected DriveTrain(String name, double p, double i, double d) {
         super(name, p, i, d);
     }
-    
-    public static void startAll(){
-        if (pbl == null)
-        	pbl = new PID_BL();
-        if (pbr == null)
-        	pbr = new PID_BR();
-        if (pfl == null)	
-        	pfl = new PID_FL();
-        if(pfr == null)
-        	pfr = new PID_FR();
-    }
 
     //Drive Code for mecanum wheels
     //http://thinktank.wpi.edu/resources/346/ControllingMecanumDrive.pdf
-    @SuppressWarnings("static-access")
-	public static void mecanumDrive() {
+	public void mecanumDrive() {
         flT = OI.getDriveStick().getMagnitude() * Math.sin(OI.getDriveStick().getDirectionRadians() + (Math.PI / 4)) + OI.getRotateStick().getX();
         frT = OI.getDriveStick().getMagnitude() * Math.cos(OI.getDriveStick().getDirectionRadians() + (Math.PI / 4)) - OI.getRotateStick().getX();
         blT = OI.getDriveStick().getMagnitude() * Math.cos(OI.getDriveStick().getDirectionRadians() + (Math.PI / 4)) + OI.getRotateStick().getX();
@@ -74,21 +62,21 @@ public abstract class DriveTrain extends PIDSubsystem implements RobotMap{
   		 setDefaultCommand(new MecanumDrive());
   	 }
   	 
-  	 public static boolean finished(){
+  	 public boolean finished(){
   		maxE = Math.max(
         		Math.max(Math.abs(pfl.getPIDController().getError()), Math.abs(pfr.getPIDController().getError())), 
         		Math.max(Math.abs(pbl.getPIDController().getError()), Math.abs(pbr.getPIDController().getError())));
   		return maxE < 10;
   	 }
   	 
-  	 public static void resetPID(){
+  	 public void resetPID(){
   		pbl.getPIDController().reset();
   		pfl.getPIDController().reset();
   		pbr.getPIDController().reset();
   		pfr.getPIDController().reset();
   	 }
   	 
-  	 public static void forward(double distance){
+  	 public void forward(double distance){
   		pbl.setSetpoint(distance);
   		pbr.setSetpoint(distance);
   		pfl.setSetpoint(distance);

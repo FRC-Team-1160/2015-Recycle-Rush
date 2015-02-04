@@ -1,6 +1,11 @@
 
 package org.usfirst.frc.team1160.robot;
 
+import org.usfirst.frc.team1160.robot.subsystems.drive.PID_BL;
+import org.usfirst.frc.team1160.robot.subsystems.drive.PID_BR;
+import org.usfirst.frc.team1160.robot.subsystems.drive.PID_FL;
+import org.usfirst.frc.team1160.robot.subsystems.drive.PID_FR;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -16,6 +21,10 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 public class Robot extends IterativeRobot {
 
 	public static OI oi;
+	public static PID_BL pbl;
+	public static PID_FL pfl;
+	public static PID_FR pfr;
+	public static PID_BR pbr;
 
     Command autonomousCommand;
 
@@ -24,8 +33,11 @@ public class Robot extends IterativeRobot {
      * used for any initialization code.
      */
     public void robotInit() {
+		pbl = PID_BL.getInstance();
+		pfl = PID_FL.getInstance();
+		pbr = PID_BR.getInstance();
+		pfr = PID_FR.getInstance();
 		oi = new OI();
-		
         // instantiate the command used for the autonomous period
     }
 	

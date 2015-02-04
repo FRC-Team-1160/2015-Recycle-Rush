@@ -9,8 +9,15 @@ import edu.wpi.first.wpilibj.Talon;
 
 public class PID_BL extends DriveTrain implements RobotMap{
 	
+	private static PID_BL instance;
 	
-	 public PID_BL(){
+	public static PID_BL getInstance(){
+		if(instance == null)
+			instance = new PID_BL();
+		return instance;
+	}
+	
+	 private PID_BL(){
 		 //Setting things
 		 super("PID_BL", 1.0, 0.0, 0.0);
 		 bl = new Talon(DT_MOTOR_BL);

@@ -1,6 +1,6 @@
 package org.usfirst.frc.team1160.robot.commands.drive;
 
-import org.usfirst.frc.team1160.robot.subsystems.drive.DriveTrain;
+import org.usfirst.frc.team1160.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -10,7 +10,10 @@ import edu.wpi.first.wpilibj.command.Command;
 public class MecanumDrive extends Command {
 
     public MecanumDrive() {
-        requires(null);
+        requires(Robot.pbl);
+        requires(Robot.pbr);
+        requires(Robot.pfl);
+        requires(Robot.pfr);
     }
 
     // Called just before this Command runs the first time
@@ -20,7 +23,10 @@ public class MecanumDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	DriveTrain.mecanumDrive();
+    	Robot.pbl.mecanumDrive();
+    	Robot.pfl.mecanumDrive();
+    	Robot.pbr.mecanumDrive();
+    	Robot.pfr.mecanumDrive();
     }
 
     // Make this return true when this Command no longer needs to run execute()

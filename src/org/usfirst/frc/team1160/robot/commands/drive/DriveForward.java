@@ -1,6 +1,6 @@
 package org.usfirst.frc.team1160.robot.commands.drive;
 
-import org.usfirst.frc.team1160.robot.subsystems.drive.DriveTrain;
+import org.usfirst.frc.team1160.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -12,23 +12,32 @@ public class DriveForward extends Command {
 	private double distance;
 	
     public DriveForward(double distance) {
-        requires(null);
+        requires(Robot.pbl);
+        requires(Robot.pbr);
+        requires(Robot.pfl);
+        requires(Robot.pfr);
         this.distance = distance;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	DriveTrain.resetPID();
+   	 Robot.pbl.getPIDController().reset();
+   	 Robot.pfl.getPIDController().reset();
+   	 Robot.pfr.getPIDController().reset();
+   	 Robot.pbr.getPIDController().reset();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	DriveTrain.forward(distance);
+   	 Robot.pbl.forward(distance);
+   	 Robot.pfl.forward(distance);
+   	 Robot.pfr.forward(distance);
+   	 Robot.pbr.forward(distance);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return DriveTrain.finished(); 
+        return Robot.pbl.getPosition() - Robot.pbl.getSetpoint() > 5;
     }
 
     // Called once after isFinished returns true

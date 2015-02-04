@@ -14,10 +14,10 @@ public interface RobotMap {
     public final static int DT_MOTOR_BR = 3;
     public final static int DT_MOTOR_FR = 4;
 
-    public final static int PN_SOL_A = 1;
+/*    public final static int PN_SOL_A = 1;
     public final static int PN_SOL_B = 2;
     public final static int PN_PRESSURE_SWITCH = 1;
-    public final static int PN_RELAY = 1;
+    public final static int PN_RELAY = 1;*/
     
     //Joysticks
     public final static int JOY_DRIVE = 1;
