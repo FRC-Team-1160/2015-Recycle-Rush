@@ -1,6 +1,9 @@
 package org.usfirst.frc.team1160.robot;
 
+import org.usfirst.frc.team1160.robot.commands.drive.DriveForward;
+
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -9,12 +12,15 @@ import edu.wpi.first.wpilibj.Joystick;
 public class OI implements RobotMap{
 	
 	
-    private static Joystick d_stick;
-    private static Joystick r_stick;
+    private static Joystick d_stick, r_stick;
+    private static JoystickButton f;
 
     public OI() {
         d_stick = new Joystick(JOY_DRIVE);
         r_stick = new Joystick(JOY_ROTATE);
+        
+        f = new JoystickButton(d_stick, 1);
+        f.whenPressed(new DriveForward(40));
     }
     
     

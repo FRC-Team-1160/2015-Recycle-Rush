@@ -9,10 +9,11 @@ public interface RobotMap {
 	
 	
     //Ports
-    public final static int DT_MOTOR_FR = 1;
-    public final static int DT_MOTOR_BR = 2;
-    public final static int DT_MOTOR_BL = 3;
-    public final static int DT_MOTOR_FL = 4;
+    public final static int DT_MOTOR_BL = 1;
+    public final static int DT_MOTOR_FL = 2;
+    public final static int DT_MOTOR_BR = 3;
+    public final static int DT_MOTOR_FR = 4;
+
     public final static int PN_SOL_A = 1;
     public final static int PN_SOL_B = 2;
     public final static int PN_PRESSURE_SWITCH = 1;
@@ -23,14 +24,15 @@ public interface RobotMap {
     public final static int JOY_ROTATE = 2;
     
     //PID
-    public final static int PID_ENCODER_FL_A = 1;
-    public final static int PID_ENCODER_FL_B = 2;
-    public final static int PID_ENCODER_BL_A = 3;
-    public final static int PID_ENCODER_BL_B = 4;
-    public final static int PID_ENCODER_FR_A = 5;
-    public final static int PID_ENCODER_FR_B = 6;
-    public final static int PID_ENCODER_BR_A = 7;
-    public final static int PID_ENCODER_BR_B = 8;
+    public final static int PID_ENCODER_BL_A = 2;
+    public final static int PID_ENCODER_BL_B = 3;
+    public final static int PID_ENCODER_FL_A = 4;
+    public final static int PID_ENCODER_FL_B = 5;
+    public final static int PID_ENCODER_BR_A = 6;
+    public final static int PID_ENCODER_BR_B = 7;
+    public final static int PID_ENCODER_FR_A = 8;
+    public final static int PID_ENCODER_FR_B = 9;
+    
     public final static double DISTANCE_PER_PULSE = 1;
     
     //Camera

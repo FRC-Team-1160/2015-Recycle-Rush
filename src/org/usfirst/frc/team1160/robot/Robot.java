@@ -1,8 +1,6 @@
 
 package org.usfirst.frc.team1160.robot;
 
-import org.usfirst.frc.team1160.robot.subsystems.drive.DriveTrain;
-
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -18,7 +16,6 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 public class Robot extends IterativeRobot {
 
 	public static OI oi;
-	public static DriveTrain dt;
 
     Command autonomousCommand;
 
@@ -28,6 +25,7 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
 		oi = new OI();
+		
         // instantiate the command used for the autonomous period
     }
 	
