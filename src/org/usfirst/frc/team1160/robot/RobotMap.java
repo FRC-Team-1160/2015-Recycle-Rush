@@ -33,7 +33,7 @@ public interface RobotMap {
     public final static int PID_ENCODER_FR_A = 8;
     public final static int PID_ENCODER_FR_B = 9;
     
-    public final static double DISTANCE_PER_PULSE = 1;
+    public final static double DISTANCE_PER_PULSE = .0001;
     
     //Camera
     public final static String CAM_ADDRESS = "10.11.60.2";

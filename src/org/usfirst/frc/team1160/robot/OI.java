@@ -19,7 +19,7 @@ public class OI implements RobotMap{
         d_stick = new Joystick(JOY_DRIVE);
         r_stick = new Joystick(JOY_ROTATE);
         
-        f = new JoystickButton(d_stick, 1);
+        f = new JoystickButton(d_stick, 3);
         f.whenPressed(new DriveForward(40));
     }
     

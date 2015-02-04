@@ -33,7 +33,7 @@ public class PID_BL extends DriveTrain implements RobotMap{
 	 
 	 //Set PID value return method
 	 protected double returnPIDInput(){
-		 return ebl.get();
+		 return ebl.pidGet();
 	 }
 	 
 	 //Write the motor's PID Output
