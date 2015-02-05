@@ -12,40 +12,40 @@ public class DriveForward extends Command {
 	private double distance;
 	
     public DriveForward(double distance) {
-        requires(Robot.pbl);
-        requires(Robot.pbr);
-        requires(Robot.pfl);
-        requires(Robot.pfr);
+    	requires(Robot.dt);
         this.distance = distance;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-   	 Robot.pbl.getPIDController().reset();
-   	 Robot.pfl.getPIDController().reset();
-   	 Robot.pfr.getPIDController().reset();
-   	 Robot.pbr.getPIDController().reset();
+    	Robot.dt.reset();
+    	Robot.dt.enable();
+    	System.out.println("forward march: " + distance + " meters");
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-   	 Robot.pbl.forward(distance);
-   	 Robot.pfl.forward(distance);
-   	 Robot.pfr.forward(distance);
-   	 Robot.pbr.forward(distance);
+    	Robot.dt.forward(distance);
+    	System.out.println(Robot.dt.blP.getPosition());
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.pbl.finished();
+        return Robot.dt.itDone();
     }
 
     // Called once after isFinished returns true
     protected void end() {
+    	System.out.println("finsihes");
+    	Robot.dt.reset();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	Robot.dt.blP.disable();
+    	Robot.dt.brP.disable();
+    	Robot.dt.flP.disable();
+    	Robot.dt.frP.disable();
     }
 }

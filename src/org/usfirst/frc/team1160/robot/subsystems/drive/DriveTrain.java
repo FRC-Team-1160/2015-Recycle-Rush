@@ -1,30 +1,54 @@
 package org.usfirst.frc.team1160.robot.subsystems.drive;
 
 import org.usfirst.frc.team1160.robot.OI;
+import org.usfirst.frc.team1160.robot.Robot;
 import org.usfirst.frc.team1160.robot.RobotMap;
 import org.usfirst.frc.team1160.robot.commands.drive.MecanumDrive;
 
+import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.command.PIDSubsystem;
-
+import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  *
  */
-public abstract class DriveTrain extends PIDSubsystem implements RobotMap{
+public class DriveTrain extends Subsystem implements RobotMap{
     
-    protected Encoder ebl, ebr, efl, efr;
+    private static DriveTrain instance;
+    protected final Talon fl, fr, bl, br;
+    protected final Encoder flEnc, frEnc, blEnc, brEnc;
     private double maxV, maxE, flT, frT, blT, brT;
-    protected Talon fl, fr, bl, br;
+    public PID flP, frP, brP, blP;
+    
 
-    protected DriveTrain(String name, double p, double i, double d) {
-        super(name, p, i, d);
+    //Assigning each talon a port
+    private DriveTrain() {
+        fl = new Talon(DT_MOTOR_FL);
+        fr = new Talon(DT_MOTOR_FR);
+        bl = new Talon(DT_MOTOR_BL);
+        br = new Talon(DT_MOTOR_BR);
+        flEnc = new Encoder(PID_ENCODER_FL_A, PID_ENCODER_FL_B, true, EncodingType.k2X);
+        frEnc = new Encoder(PID_ENCODER_FR_A, PID_ENCODER_FR_B, false, EncodingType.k2X);
+        blEnc = new Encoder(PID_ENCODER_BL_A, PID_ENCODER_BL_B, true, EncodingType.k2X);
+        brEnc = new Encoder(PID_ENCODER_BR_A, PID_ENCODER_BR_B, false, EncodingType.k2X);
+        flP = new PID("FrontLeft", P, I, D, fl, flEnc);
+        frP = new PID("FrontRight", P, I, D, fr, frEnc);
+        blP = new PID("BackLeft", P, I, D, bl, blEnc);
+        brP = new PID("BackRight", P, I, D, br, brEnc);
+    }
+
+    //Ensures the port assignment above happens only once
+    public static DriveTrain getInstance() {
+        if (instance == null) {
+            instance = new DriveTrain();
+        }
+        return instance;
     }
 
     //Drive Code for mecanum wheels
     //http://thinktank.wpi.edu/resources/346/ControllingMecanumDrive.pdf
-	public void mecanumDrive() {
+    public void mecanumDrive() {
         flT = OI.getDriveStick().getMagnitude() * Math.sin(OI.getDriveStick().getDirectionRadians() + (Math.PI / 4)) + OI.getRotateStick().getX();
         frT = OI.getDriveStick().getMagnitude() * Math.cos(OI.getDriveStick().getDirectionRadians() + (Math.PI / 4)) - OI.getRotateStick().getX();
         blT = OI.getDriveStick().getMagnitude() * Math.cos(OI.getDriveStick().getDirectionRadians() + (Math.PI / 4)) + OI.getRotateStick().getX();
@@ -40,65 +64,41 @@ public abstract class DriveTrain extends PIDSubsystem implements RobotMap{
         	blT = blT / maxV;
         	brT = brT / maxV;
         }
-        
-        PID_FL.getInstance().fl.set(-flT);
-        PID_FR.getInstance().fr.set(frT);
-        PID_BL.getInstance().bl.set(-blT);
-        PID_BR.getInstance().br.set(brT);
-        
-        System.out.println("FR is : " + PID_FR.getInstance().getPosition());
-        System.out.println("FL is : " + PID_FL.getInstance().getPosition());
-        System.out.println("BR is : " + PID_BR.getInstance().getPosition());
-        System.out.println("BL is : " + PID_BL.getInstance().getPosition());
-        System.out.println();
+        //System.out.println("frontleft set to: " + -flT + " \nfrontright set to: " + frT + " \nbackleft set to: " + -blT + " \nbackright set to: " + brT);
+        fl.set(-flT);
+        fr.set(frT);
+        bl.set(-blT);
+        br.set(brT);
+    }
+    
+    public boolean itDone(){
+    	return flP.finished() && frP.finished() && blP.finished() && brP.finished();
+    }
+    
+    public void reset(){
+    	flP.getPIDController().disable();
+    	frP.getPIDController().disable();
+    	blP.getPIDController().disable();
+    	brP.getPIDController().disable();
+    }
+    
+    public void enable(){
+    	blP.enable();
+    	brP.enable();
+    	flP.enable();
+    	frP.enable();
+    }
+    
+    public void forward(double distance){
+    	flP.setSetpoint(distance);
+    	frP.setSetpoint(distance);
+    	blP.setSetpoint(distance);
+    	brP.setSetpoint(distance);
     }
 
     //Sets the default command
-  	 public void initDefaultCommand(){	
-  		 setDefaultCommand(new MecanumDrive());
-  	 }
-  	 
-  	 public boolean finished(){
-  		maxE = Math.max(
-        		Math.max(Math.abs(PID_FL.getInstance().getPIDController().getError()), Math.abs(PID_BL.getInstance().getPIDController().getError())), 
-        		Math.max(Math.abs(PID_FR.getInstance().getPIDController().getError()), Math.abs(PID_BR.getInstance().getPIDController().getError())));
-  		return maxE < 5;
-  	 }
-  	 
-  	 public void resetPID(){
-  		PID_FL.getInstance().getPIDController().reset();
-  		PID_BL.getInstance().getPIDController().reset();
-  		PID_FR.getInstance().getPIDController().reset();
-  		PID_BR.getInstance().getPIDController().reset();
-  	 }
-  	 
-  	 public void forward(double distance){
-  		PID_BL.getInstance().setSetpoint(distance);
-  		PID_BR.getInstance().setSetpoint(distance);
-  		PID_FL.getInstance().setSetpoint(distance);
-  		PID_FR.getInstance().setSetpoint(distance);
-  	 }
-  	 
-  	 public void right(double distance){
-   		PID_BL.getInstance().setSetpoint(-distance);
-   		PID_BR.getInstance().setSetpoint(distance);
-   		PID_FL.getInstance().setSetpoint(distance);
-   		PID_FR.getInstance().setSetpoint(-distance);
-  	 }
-  	 
-  	 public void left(double distance){
-   		PID_BL.getInstance().setSetpoint(distance);
-   		PID_BR.getInstance().setSetpoint(-distance);
-   		PID_FL.getInstance().setSetpoint(-distance);
-   		PID_FR.getInstance().setSetpoint(distance);
-  	 }
-  	 
-  	 public void backward(double distance){
-   		PID_BL.getInstance().setSetpoint(-distance);
-   		PID_BR.getInstance().setSetpoint(-distance);
-   		PID_FL.getInstance().setSetpoint(-distance);
-   		PID_FR.getInstance().setSetpoint(-distance);
-  	 }
-     
+    protected void initDefaultCommand() {
+        setDefaultCommand(new MecanumDrive());
+    }
 }
 

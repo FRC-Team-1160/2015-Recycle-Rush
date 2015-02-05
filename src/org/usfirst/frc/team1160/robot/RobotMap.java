@@ -13,7 +13,7 @@ public interface RobotMap {
     public final static int DT_MOTOR_FL = 2;
     public final static int DT_MOTOR_BR = 3;
     public final static int DT_MOTOR_FR = 4;
-
+    
 /*    public final static int PN_SOL_A = 1;
     public final static int PN_SOL_B = 2;
     public final static int PN_PRESSURE_SWITCH = 1;
@@ -24,6 +24,10 @@ public interface RobotMap {
     public final static int JOY_ROTATE = 2;
     
     //PID
+    public final static double ABS_TOL = 0.1;
+    public final static double P = 0.5;
+    public final static double I = 0.0;
+    public final static double D = 0.0;
     public final static int PID_ENCODER_BL_A = 2;
     public final static int PID_ENCODER_BL_B = 3;
     public final static int PID_ENCODER_FL_A = 4;
@@ -33,7 +37,7 @@ public interface RobotMap {
     public final static int PID_ENCODER_FR_A = 8;
     public final static int PID_ENCODER_FR_B = 9;
     
-    public final static double DISTANCE_PER_PULSE = .0001;
+    public final static double DISTANCE_PER_PULSE = .01;
     
     //Camera
     public final static String CAM_ADDRESS = "10.11.60.2";

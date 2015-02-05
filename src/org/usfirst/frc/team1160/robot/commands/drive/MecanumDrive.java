@@ -10,10 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class MecanumDrive extends Command {
 
     public MecanumDrive() {
-        requires(Robot.pbl);
-        requires(Robot.pbr);
-        requires(Robot.pfl);
-        requires(Robot.pfr);
+    	requires(Robot.dt);
     }
 
     // Called just before this Command runs the first time
@@ -23,10 +20,7 @@ public class MecanumDrive extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.pbl.mecanumDrive();
-    	Robot.pfl.mecanumDrive();
-    	Robot.pbr.mecanumDrive();
-    	Robot.pfr.mecanumDrive();
+    	Robot.dt.mecanumDrive();
     }
 
     // Make this return true when this Command no longer needs to run execute()
