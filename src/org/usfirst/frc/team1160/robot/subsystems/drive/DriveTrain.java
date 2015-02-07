@@ -105,6 +105,7 @@ public class DriveTrain extends Subsystem implements RobotMap{
     	blP.setSetpoint(-distance);
     	brP.setSetpoint(distance);
     }
+<<<<<<< HEAD
     
     public void reverse(double distance){
     	flP.setSetpoint(distance);
@@ -141,6 +142,8 @@ public class DriveTrain extends Subsystem implements RobotMap{
     	frP.setSetpoint(-distance);
     	blP.setSetpoint(distance);
     }
+=======
+>>>>>>> 1429294be0550d68e444a1c0ce0875ebc011def2
 
     //Sets the default command
     protected void initDefaultCommand() {
