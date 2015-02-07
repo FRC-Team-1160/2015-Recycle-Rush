@@ -35,6 +35,8 @@ public class PID extends PIDSubsystem {
     }
     
     public boolean finished(){
+    	if(this.getPIDController().onTarget())
+    		System.out.println(this.getName() + ": finished.");
     	return this.getPIDController().onTarget();
     }
     

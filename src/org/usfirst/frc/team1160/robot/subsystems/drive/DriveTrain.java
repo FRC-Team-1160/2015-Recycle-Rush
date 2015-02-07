@@ -29,9 +29,9 @@ public class DriveTrain extends Subsystem implements RobotMap{
         bl = new Talon(DT_MOTOR_BL);
         br = new Talon(DT_MOTOR_BR);
         flEnc = new Encoder(PID_ENCODER_FL_A, PID_ENCODER_FL_B, true, EncodingType.k2X);
-        frEnc = new Encoder(PID_ENCODER_FR_A, PID_ENCODER_FR_B, false, EncodingType.k2X);
-        blEnc = new Encoder(PID_ENCODER_BL_A, PID_ENCODER_BL_B, true, EncodingType.k2X);
-        brEnc = new Encoder(PID_ENCODER_BR_A, PID_ENCODER_BR_B, false, EncodingType.k2X);
+        frEnc = new Encoder(PID_ENCODER_FR_A, PID_ENCODER_FR_B, true, EncodingType.k2X);
+        blEnc = new Encoder(PID_ENCODER_BL_A, PID_ENCODER_BL_B, false, EncodingType.k2X);
+        brEnc = new Encoder(PID_ENCODER_BR_A, PID_ENCODER_BR_B, true, EncodingType.k2X);
         flP = new PID("FrontLeft", P, I, D, fl, flEnc);
         frP = new PID("FrontRight", P, I, D, fr, frEnc);
         blP = new PID("BackLeft", P, I, D, bl, blEnc);
@@ -69,10 +69,16 @@ public class DriveTrain extends Subsystem implements RobotMap{
         fr.set(frT);
         bl.set(-blT);
         br.set(brT);
+        
+        System.out.println(flP.getName() + ": reads: " + flP.enc.pidGet());
+        System.out.println(frP.getName() + ": reads: " + frP.enc.pidGet());
+        System.out.println(blP.getName() + ": reads: " + blP.enc.pidGet());
+        System.out.println(brP.getName() + ": reads: " + brP.enc.pidGet());
+        
     }
     
     public boolean itDone(){
-    	return flP.finished() && frP.finished() && blP.finished() && brP.finished();
+    	return flP.finished();
     }
     
     public void reset(){
@@ -84,15 +90,19 @@ public class DriveTrain extends Subsystem implements RobotMap{
     
     public void enable(){
     	blP.enable();
+    	System.out.println(blP.getName() + ": ENABLED");
     	brP.enable();
+    	System.out.println(brP.getName() + ": ENABLED");
     	flP.enable();
+    	System.out.println(flP.getName() + ": ENABLED");
     	frP.enable();
+    	System.out.println(frP.getName() + ": ENABLED");
     }
     
     public void forward(double distance){
-    	flP.setSetpoint(distance);
+    	flP.setSetpoint(-distance);
     	frP.setSetpoint(distance);
-    	blP.setSetpoint(distance);
+    	blP.setSetpoint(-distance);
     	brP.setSetpoint(distance);
     }
 

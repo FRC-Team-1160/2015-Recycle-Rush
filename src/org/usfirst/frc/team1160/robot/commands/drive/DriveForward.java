@@ -26,7 +26,7 @@ public class DriveForward extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.dt.forward(distance);
-    	System.out.println(Robot.dt.blP.getPosition());
+//    	System.out.println(Robot.dt.blP.getPosition());
     }
 
     // Make this return true when this Command no longer needs to run execute()

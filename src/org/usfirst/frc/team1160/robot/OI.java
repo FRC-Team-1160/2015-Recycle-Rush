@@ -23,7 +23,7 @@ public class OI implements RobotMap{
         m = new JoystickButton(d_stick, 1);
         f = new JoystickButton(d_stick, 3);
         m.whenPressed(new MecanumDrive());
-        f.whenPressed(new DriveForward(20));
+        f.whenPressed(new DriveForward(35));
     }
     
     
