@@ -12,6 +12,11 @@ public class Pistons extends Subsystem implements RobotMap{
     private DoubleSolenoid middle, upperA, upperB, grabberA, grabberB;
     private Compressor comp;
     
+    
+    /******************************************************************
+     * Constructor for the DriveTrain Subsystem
+     * -Compressor/Solenoids are assigned ports and initialized
+     ******************************************************************/
     private Pistons(){
     	comp = new Compressor();
     	comp.start();
@@ -22,6 +27,13 @@ public class Pistons extends Subsystem implements RobotMap{
         grabberB = new DoubleSolenoid(GRABBER_A, GRABBER_B);
     }
     
+    
+    /******************************************************************
+     * Singleton for Pistons constructor
+     * -Prevents constructor from running more than once
+     * ->If constructor runs more than once, ports are assigned that 
+     *   already have a spot, which results in an error upon building
+     ******************************************************************/
     public static Pistons getInstance(){
         if(instance == null){
             instance = new Pistons();
@@ -29,6 +41,26 @@ public class Pistons extends Subsystem implements RobotMap{
         return instance;
     }
     
+    
+    /******************************************************************
+     * Each Subsystem is required to have a method that designates
+     * the default command when the subsystem is created
+     * The default command is what the subsystem refers back to in case
+     * of an unexpected error with a different command, and is also
+     * the first command called
+     * Pistons are always single actuation, so there is no need for
+     * a command to default back to/start with
+     ******************************************************************/
+    protected void initDefaultCommand() {
+    	setDefaultCommand(null);
+    }
+    
+    
+    /******************************************************************
+     * The following methods are used in commands
+     * Solenoids are either set to EXT or RET (extend or retract)
+     * these values correspond to RobotMap variables
+     ******************************************************************/
     public void midUp(){
     	middle.set(RET);
     }
@@ -56,9 +88,6 @@ public class Pistons extends Subsystem implements RobotMap{
     	grabberA.set(RET);
     	grabberB.set(RET);
     }
-    
-    protected void initDefaultCommand() {
-    	setDefaultCommand(null);
-    }
+
 
 }

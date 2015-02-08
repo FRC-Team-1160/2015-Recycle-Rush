@@ -1,7 +1,7 @@
 
 package org.usfirst.frc.team1160.robot;
 
-import org.usfirst.frc.team1160.robot.subsystems.Pistons;
+import org.usfirst.frc.team1160.robot.subsystems.*;
 import org.usfirst.frc.team1160.robot.subsystems.drive.DriveTrain;
 
 import edu.wpi.first.wpilibj.IterativeRobot;

@@ -12,43 +12,70 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class PID extends PIDSubsystem implements RobotMap{
 	
-	String name;
-	Talon motor;
-	Encoder enc;
+	private String name;
+	private Talon motor;
+	private Encoder enc;
 	
 	
-    // Initialize your subsystem here
+    /******************************************************************
+     * Constructor for the PID Subsystem, used with each wheel
+     * -super() is required to initialize the subsystem with the given
+     *  values
+     * -this.variable = variable; allows the entire class to use the
+     *  variables passed into PID() as arguments
+     ******************************************************************/
     public PID(String name, Talon motor, Encoder enc) {
     	super(name, P, I, D);
     	this.motor = motor;
     	this.enc = enc;
-    	this.name = name;
     	enc.setDistancePerPulse(RobotMap.DISTANCE_PER_PULSE);
     	this.getPIDController().setContinuous();
     	this.getPIDController().setAbsoluteTolerance(RobotMap.ABS_TOL);
     }
     
+    
+    /******************************************************************
+     * @see DriveTrain#reset() 
+     * for information
+     ******************************************************************/
     public void reInit(){
     	getPIDController().reset();
     	getPIDController().setPID(P, I, D);
     }
     
-    public void initDefaultCommand() {}
     
+    /******************************************************************
+     * returnPIDInput() is a method that is required by PIDSubsystem
+     * -Allows monitoring of the PID values in SmartDashboard
+     * -enc.pidGet() passes the value of the encoder into the
+     *  PIDSubystem, allowing for motor feedback
+     ******************************************************************/
     protected double returnPIDInput() {
     	SmartDashboard.putNumber(this.getName() + ": PID: ", enc.pidGet());
     	return enc.pidGet();
     }
     
+    
+    /******************************************************************
+     * @see DriveTrain#itDone()
+     * for information
+     ******************************************************************/
     public boolean finished(){
-    	System.out.println(this.name + " pid error: " + this.getPIDController().getError());
-    	if(this.getPIDController().onTarget())
-    		System.out.println(this.getName() + ": finished.");
+    	SmartDashboard.putNumber(this.name + " error: ", this.getPIDController().getError());
     	return this.getPIDController().onTarget();
     }
     
+    
+    /******************************************************************
+     * usePIDOutput() is required by PIDSubsystem
+     * -takes the calculations done by the system and passes them
+     *  into the motor
+     *  -output is reduced by half so motors don't run at full speed
+     ******************************************************************/
     protected void usePIDOutput(double output) {
     	SmartDashboard.putNumber(this.getName() + ": MOTOR: ", output/2);
     	motor.pidWrite(output/2);
     }
+    
+    public void initDefaultCommand() {}
 }
