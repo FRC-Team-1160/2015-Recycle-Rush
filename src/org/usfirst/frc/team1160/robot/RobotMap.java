@@ -78,4 +78,12 @@ public interface RobotMap {
     public static final double I = 0.0;
     public static final double D = 1.5;
     
+    
+    /******************
+     **AUTO DISTANCES** 
+     ******************/
+    public static final double FORWARD_INIT = 20;
+    public static final double SIDE = 20;
+    public static final double FORWARD_SEC = 20;
+    
 }
