@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1160.robot.subsystems;
+/*package org.usfirst.frc.team1160.robot.subsystems;
 
 import org.usfirst.frc.team1160.robot.RobotMap;
 
@@ -13,7 +13,8 @@ public class Vision extends Subsystem implements RobotMap{
     private static Vision instance;
     private static AxisCamera cam;
     private ColorImage image;
-    private BinaryImage bImage;
+    @SuppressWarnings("unused")
+	private BinaryImage bImage;
     
     private Vision(){
         cam = new AxisCamera(CAM_ADDRESS);
@@ -40,3 +41,4 @@ public class Vision extends Subsystem implements RobotMap{
     
     
 }
+*/

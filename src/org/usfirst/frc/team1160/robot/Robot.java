@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team1160.robot;
 
+import org.usfirst.frc.team1160.robot.subsystems.Pistons;
 import org.usfirst.frc.team1160.robot.subsystems.drive.DriveTrain;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -19,6 +20,7 @@ public class Robot extends IterativeRobot {
 
 	public static OI oi;
 	public static DriveTrain dt;
+	public static Pistons air;
 
     Command autonomousCommand;
 
@@ -28,6 +30,7 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
 		dt = DriveTrain.getInstance();
+		air = Pistons.getInstance();
 		oi = new OI();
         // instantiate the command used for the autonomous period
     }

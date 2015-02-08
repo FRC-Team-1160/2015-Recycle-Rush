@@ -1,7 +1,8 @@
 package org.usfirst.frc.team1160.robot;
 
-import org.usfirst.frc.team1160.robot.commands.drive.DriveForward;
+import org.usfirst.frc.team1160.robot.commands.air.*;
 import org.usfirst.frc.team1160.robot.commands.drive.MecanumDrive;
+import org.usfirst.frc.team1160.robot.commands.groups.*;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -14,16 +15,30 @@ public class OI implements RobotMap{
 	
 	
     private static Joystick d_stick, r_stick;
-    private static JoystickButton f, m;
+    private JoystickButton autoTest, mecDrive, upUp, upDown, midUp, midDown, grab, leggo;
 
     public OI() {
         d_stick = new Joystick(JOY_DRIVE);
         r_stick = new Joystick(JOY_ROTATE);
         
-        m = new JoystickButton(d_stick, 1);
-        f = new JoystickButton(d_stick, 3);
-        m.whenPressed(new MecanumDrive());
-        f.whenPressed(new DriveForward(35));
+        upUp = new JoystickButton(d_stick, T_UP);
+        upDown = new JoystickButton(d_stick, T_DOWN);
+        grab = new JoystickButton(d_stick, GRAB);
+        leggo = new JoystickButton(d_stick, LEGGO);
+        midUp = new JoystickButton(d_stick, M_UP);
+        midDown = new JoystickButton(d_stick, M_DOWN);
+        mecDrive = new JoystickButton(d_stick, MEC_DRIVE);
+        autoTest = new JoystickButton(d_stick, AUTO_TEST);
+        
+        
+        mecDrive.whenPressed(new MecanumDrive());
+        autoTest.whenPressed(new JerkyCircle(35));
+        upUp.whenPressed(new UpperUp());
+        upDown.whenPressed(new UpperDown());
+        midUp.whenPressed(new MidUp());
+        midDown.whenPressed(new MidDown());
+        grab.whenPressed(new Grab());
+        leggo.whenPressed(new Release());
     }
     
     
@@ -35,6 +50,4 @@ public class OI implements RobotMap{
         return r_stick;
     }
 	
-	
 }
-
