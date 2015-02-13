@@ -19,6 +19,7 @@ public class DriveForward extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.dt.reset();
+    	System.out.println("rfeste");
     	Robot.dt.enable();
     	System.out.println("forward march: " + distance + " meters");
     }
@@ -26,7 +27,7 @@ public class DriveForward extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.dt.forward(distance);
-    	System.out.println(Robot.dt.blP.getPIDController().getError());
+//    	System.out.println(Robot.dt.blP.getPIDController().getError());
 //    	System.out.println(Robot.dt.blP.getPosition());
     }
 

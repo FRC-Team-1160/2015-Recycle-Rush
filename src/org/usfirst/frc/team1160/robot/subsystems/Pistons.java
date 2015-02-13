@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Pistons extends Subsystem implements RobotMap{
 
     private static Pistons instance;
-    private DoubleSolenoid middle, upperA, upperB, grabberA, grabberB;
+    private DoubleSolenoid middle, upperA, grabberA;
     private Compressor comp;
     
     
@@ -22,9 +22,9 @@ public class Pistons extends Subsystem implements RobotMap{
     	comp.start();
         middle = new DoubleSolenoid(MIDDLE_A, MIDDLE_B);
         upperA = new DoubleSolenoid(UPPER_A_A, UPPER_A_B);
-        upperB = new DoubleSolenoid(UPPER_B_A, UPPER_B_B);
+        //upperB = new DoubleSolenoid(UPPER_B_A, UPPER_B_B);
         grabberA = new DoubleSolenoid(GRABBER_A, GRABBER_B);
-        grabberB = new DoubleSolenoid(GRABBER_A, GRABBER_B);
+        //grabberB = new DoubleSolenoid(GRABBER_A, GRABBER_B);
     }
     
     
@@ -62,31 +62,31 @@ public class Pistons extends Subsystem implements RobotMap{
      * these values correspond to RobotMap variables
      ******************************************************************/
     public void midUp(){
-    	middle.set(RET);
-    }
-    
-    public void midDown(){
     	middle.set(EXT);
     }
     
+    public void midDown(){
+    	middle.set(RET);
+    }
+    
     public void topUp(){
-    	upperA.set(RET);
-    	upperB.set(RET);
+    	upperA.set(EXT);
+    	//upperB.set(RET);
     }
     
     public void topDown(){
-    	upperA.set(EXT);
-    	upperB.set(EXT);
+    	upperA.set(RET);
+    	//upperB.set(EXT);
     }
     
     public void grab(){
     	grabberA.set(EXT);
-    	grabberB.set(EXT);
+//    	grabberB.set(EXT);
     }
     
     public void release(){
     	grabberA.set(RET);
-    	grabberB.set(RET);
+ //   	grabberB.set(RET);
     }
 
 

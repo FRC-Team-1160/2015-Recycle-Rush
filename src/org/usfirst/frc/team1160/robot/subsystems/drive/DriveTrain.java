@@ -4,7 +4,6 @@ import org.usfirst.frc.team1160.robot.OI;
 import org.usfirst.frc.team1160.robot.RobotMap;
 import org.usfirst.frc.team1160.robot.commands.drive.MecanumDrive;
 
-import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -35,10 +34,10 @@ public class DriveTrain extends Subsystem implements RobotMap{
         fr = new Talon(DT_MOTOR_FR);
         bl = new Talon(DT_MOTOR_BL);
         br = new Talon(DT_MOTOR_BR);
-        flEnc = new Encoder(PID_ENCODER_FL_A, PID_ENCODER_FL_B, true, EncodingType.k2X);
-        frEnc = new Encoder(PID_ENCODER_FR_A, PID_ENCODER_FR_B, true, EncodingType.k2X);
-        blEnc = new Encoder(PID_ENCODER_BL_A, PID_ENCODER_BL_B, true, EncodingType.k2X);
-        brEnc = new Encoder(PID_ENCODER_BR_A, PID_ENCODER_BR_B, true, EncodingType.k2X);
+        flEnc = new Encoder(PID_ENCODER_FL_A, PID_ENCODER_FL_B, false);
+        frEnc = new Encoder(PID_ENCODER_FR_A, PID_ENCODER_FR_B, true);
+        blEnc = new Encoder(PID_ENCODER_BL_A, PID_ENCODER_BL_B, false);
+        brEnc = new Encoder(PID_ENCODER_BR_A, PID_ENCODER_BR_B, false);
         flP = new PID("FrontLeft", fl, flEnc);
         frP = new PID("FrontRight", fr, frEnc);
         blP = new PID("BackLeft", bl, blEnc);
@@ -87,6 +86,11 @@ public class DriveTrain extends Subsystem implements RobotMap{
         fr.set(frT);
         bl.set(-blT);
         br.set(brT);
+        
+        flP.logEncoder();
+        frP.logEncoder();
+        blP.logEncoder();
+        brP.logEncoder();
     }
     
     

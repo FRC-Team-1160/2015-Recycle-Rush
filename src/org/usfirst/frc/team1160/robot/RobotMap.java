@@ -15,36 +15,36 @@ public interface RobotMap {
      ***PWMCHANNELS*** 
      *****************/    
 	
-    public static final int DT_MOTOR_BL = 1;
-    public static final int DT_MOTOR_FL = 2;
-    public static final int DT_MOTOR_BR = 3;
-    public static final int DT_MOTOR_FR = 4;
+    public static final int DT_MOTOR_BL = 2;
+    public static final int DT_MOTOR_FL = 3;
+    public static final int DT_MOTOR_BR = 1;
+    public static final int DT_MOTOR_FR = 0;
     
     /*****************
      ***DIGITAL I/O*** 
      *****************/
     
-    public static final int PID_ENCODER_BL_A = 2;
-    public static final int PID_ENCODER_BL_B = 3;
+    public static final int PID_ENCODER_BL_A = 6;
+    public static final int PID_ENCODER_BL_B = 7;
     public static final int PID_ENCODER_FL_A = 4;
     public static final int PID_ENCODER_FL_B = 5;
-    public static final int PID_ENCODER_BR_A = 6;
-    public static final int PID_ENCODER_BR_B = 7;
-    public static final int PID_ENCODER_FR_A = 8;
-    public static final int PID_ENCODER_FR_B = 9;
+    public static final int PID_ENCODER_BR_A = 0;
+    public static final int PID_ENCODER_BR_B = 1;
+    public static final int PID_ENCODER_FR_A = 2;
+    public static final int PID_ENCODER_FR_B = 3;
     
     /*****************
      ***PNEUMATICS**** 
      *****************/    
     
-    public static final int MIDDLE_A = 1;
-    public static final int MIDDLE_B = 2;
-    public static final int UPPER_A_A = 3;
-    public static final int UPPER_A_B = 4;
-    public static final int UPPER_B_A = 5;
-    public static final int UPPER_B_B = 6;
+    public static final int MIDDLE_A = 5;
+    public static final int MIDDLE_B = 6;
+    public static final int UPPER_A_A = 1;
+    public static final int UPPER_A_B = 2;
+    //public static final int UPPER_B_A = 5;
+    //public static final int UPPER_B_B = 6;
     public static final int GRABBER_A = 3;
-    public static final int GRABBER_B = 3;
+    public static final int GRABBER_B = 4;
     public static final Value EXT = DoubleSolenoid.Value.kForward;
     public static final Value RET = DoubleSolenoid.Value.kReverse;
     
@@ -64,26 +64,26 @@ public interface RobotMap {
     public static final int T_DOWN = 3;
     public static final int M_UP = 4;
     public static final int M_DOWN = 5;
-    public static final int GRAB = 6;
-    public static final int LEGGO = 7;
-    public static final int AUTO_TEST = 6;
+    public static final int GRAB = 1;
+    public static final int LEGGO = 2;
+    public static final int AUTO_TEST = 9;
 
     /******************
      **PID CONTROLLER** 
      ******************/    
 
     public static final double ABS_TOL = 0.5;
-    public static final double DISTANCE_PER_PULSE = 0.1;
-    public static final double P = 1.0;
+    public static final double DISTANCE_PER_PULSE = 0.005;
+    public static final double P = 1.5;
     public static final double I = 0.0;
-    public static final double D = 1.5;
+    public static final double D = 4.5;
     
     
     /******************
      **AUTO DISTANCES** 
      ******************/
-    public static final double FORWARD_INIT = 20;
-    public static final double SIDE = 20;
-    public static final double FORWARD_SEC = 20;
+    public static final double FORWARD_INIT = 8;
+    public static final double SIDE = 10;
+    public static final double FORWARD_SEC = 8;
     
 }

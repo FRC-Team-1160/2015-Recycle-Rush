@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class PID extends PIDSubsystem implements RobotMap{
 	
-	private String name;
 	private Talon motor;
 	private Encoder enc;
 	
@@ -40,7 +39,8 @@ public class PID extends PIDSubsystem implements RobotMap{
      ******************************************************************/
     public void reInit(){
     	getPIDController().reset();
-    	getPIDController().setPID(P, I, D);
+    	getPIDController().setPID(SmartDashboard.getNumber("kP"), I, SmartDashboard.getNumber("kD"));
+    	this.enc.reset();
     }
     
     
@@ -51,8 +51,11 @@ public class PID extends PIDSubsystem implements RobotMap{
      *  PIDSubystem, allowing for motor feedback
      ******************************************************************/
     protected double returnPIDInput() {
-    	SmartDashboard.putNumber(this.getName() + ": PID: ", enc.pidGet());
     	return enc.pidGet();
+    }
+    
+    protected void logEncoder(){
+    	SmartDashboard.putNumber(this.getName() + ": PID: ", enc.pidGet());
     }
     
     
@@ -61,7 +64,7 @@ public class PID extends PIDSubsystem implements RobotMap{
      * for information
      ******************************************************************/
     public boolean finished(){
-    	SmartDashboard.putNumber(this.name + " error: ", this.getPIDController().getError());
+    	SmartDashboard.putNumber(this.getName() + ": error: ", this.getPIDController().getError());
     	return this.getPIDController().onTarget();
     }
     
@@ -73,8 +76,9 @@ public class PID extends PIDSubsystem implements RobotMap{
      *  -output is reduced by half so motors don't run at full speed
      ******************************************************************/
     protected void usePIDOutput(double output) {
-    	SmartDashboard.putNumber(this.getName() + ": MOTOR: ", output/2);
-    	motor.pidWrite(output/2);
+    	SmartDashboard.putNumber(this.getName() + ": MOTOR: ", output*(.75));
+    	this.logEncoder();
+    	motor.pidWrite(output*(.75));
     }
     
     public void initDefaultCommand() {}

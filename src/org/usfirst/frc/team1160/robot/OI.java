@@ -1,8 +1,8 @@
 package org.usfirst.frc.team1160.robot;
 
 import org.usfirst.frc.team1160.robot.commands.air.*;
-import org.usfirst.frc.team1160.robot.commands.drive.MecanumDrive;
-import org.usfirst.frc.team1160.robot.commands.groups.JerkyCircle;
+import org.usfirst.frc.team1160.robot.commands.drive.*;
+import org.usfirst.frc.team1160.robot.commands.groups.*;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -37,8 +37,8 @@ public class OI implements RobotMap{
     private void tie(){
         upUp = new JoystickButton(d_stick, T_UP);
         upDown = new JoystickButton(d_stick, T_DOWN);
-        grab = new JoystickButton(d_stick, GRAB);
-        leggo = new JoystickButton(d_stick, LEGGO);
+        grab = new JoystickButton(r_stick, GRAB);
+        leggo = new JoystickButton(r_stick, LEGGO);
         midUp = new JoystickButton(d_stick, M_UP);
         midDown = new JoystickButton(d_stick, M_DOWN);
         mecDrive = new JoystickButton(d_stick, MEC_DRIVE);
@@ -53,7 +53,7 @@ public class OI implements RobotMap{
      ******************************************************************/
     private void check(){   
         mecDrive.whenPressed(new MecanumDrive());
-        autoTest.whenPressed(new JerkyCircle(35));
+        autoTest.whenPressed(new AutoRightStart());
         upUp.whenPressed(new UpperUp());
         upDown.whenPressed(new UpperDown());
         midUp.whenPressed(new MidUp());
