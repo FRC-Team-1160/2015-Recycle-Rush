@@ -15,7 +15,7 @@ public class OI implements RobotMap{
 	
 	
     private static Joystick d_stick, r_stick;
-    private JoystickButton autoTest, mecDrive, upUp, upDown, midUp, midDown, grab, leggo;
+    private JoystickButton autoA, autoB, autoC, mecDrive, upUp, upDown, midUp, midDown, grab, leggo, rotate;
 
     
     /******************************************************************
@@ -37,12 +37,15 @@ public class OI implements RobotMap{
     private void tie(){
         upUp = new JoystickButton(d_stick, T_UP);
         upDown = new JoystickButton(d_stick, T_DOWN);
+        midUp = new JoystickButton(r_stick, M_UP);
+        midDown = new JoystickButton(r_stick, M_DOWN);
+        mecDrive = new JoystickButton(d_stick, MEC_DRIVE);
         grab = new JoystickButton(r_stick, GRAB);
         leggo = new JoystickButton(r_stick, LEGGO);
-        midUp = new JoystickButton(d_stick, M_UP);
-        midDown = new JoystickButton(d_stick, M_DOWN);
-        mecDrive = new JoystickButton(d_stick, MEC_DRIVE);
-        autoTest = new JoystickButton(d_stick, AUTO_TEST);
+        autoA = new JoystickButton(r_stick, AUTO_A);
+        autoB = new JoystickButton(r_stick, AUTO_B);
+        autoC = new JoystickButton(r_stick, AUTO_C);
+        rotate = new JoystickButton(r_stick, ROTATE);
         check();
     }
     
@@ -53,7 +56,9 @@ public class OI implements RobotMap{
      ******************************************************************/
     private void check(){   
         mecDrive.whenPressed(new MecanumDrive());
-        autoTest.whenPressed(new AutoRightStart());
+        autoA.whenPressed(new AU());
+        autoB.whenPressed(new BU());
+        autoC.whenPressed(new CU());
         upUp.whenPressed(new UpperUp());
         upDown.whenPressed(new UpperDown());
         midUp.whenPressed(new MidUp());

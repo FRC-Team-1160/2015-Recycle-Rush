@@ -25,7 +25,7 @@ public class DriveTrain extends Subsystem implements RobotMap{
      * Constructor for the DriveTrain Subsystem
      * -Talons/Encoders are assigned ports and initialized
      * -New instances of the PID class are created
-     * -Values for Proportional and Derivitive are given to SmartDash
+     * -Values for Proportional and Derivative are given to SmartDash
      ******************************************************************/
     private DriveTrain() {
     	SmartDashboard.putNumber("kP", P);
@@ -152,25 +152,25 @@ public class DriveTrain extends Subsystem implements RobotMap{
      *  to move
      * -negated values are to change direction of motor spin
      ******************************************************************/
+    public void rotateFrame(boolean half, int direction){
+    	if(half){
+    		flP.setSetpoint(FL_180 * direction);
+    		frP.setSetpoint(FR_180 * direction);
+    		blP.setSetpoint(BL_180 * direction);
+    		brP.setSetpoint(BR_180 * direction);
+    	}else{
+    		flP.setSetpoint((FL_180/2) * direction);
+    		frP.setSetpoint((FR_180/2) * direction);
+    		blP.setSetpoint((BL_180/2) * direction);
+    		brP.setSetpoint((BR_180/2) * direction);
+    	}
+    }
+    
     public void forward(double distance){
     	flP.setSetpoint(-distance);
     	frP.setSetpoint(distance);
     	blP.setSetpoint(-distance);
     	brP.setSetpoint(distance);
-    }
-
-    public void reverse(double distance){
-    	flP.setSetpoint(distance);
-    	frP.setSetpoint(-distance);
-    	blP.setSetpoint(distance);
-    	brP.setSetpoint(-distance);
-    }
-    
-    public void left(double distance){
-    	flP.setSetpoint(distance);
-    	frP.setSetpoint(distance);
-    	blP.setSetpoint(-distance);
-    	brP.setSetpoint(-distance);
     }
     
     public void right(double distance){
@@ -190,14 +190,5 @@ public class DriveTrain extends Subsystem implements RobotMap{
     	brP.setSetpoint(distance);
     }
     
-    public void diagBL(double distance){
-    	flP.setSetpoint(distance);
-    	brP.setSetpoint(-distance);
-    }
-    
-    public void diagBR(double distance){
-    	frP.setSetpoint(-distance);
-    	blP.setSetpoint(distance);
-    }
 }
 

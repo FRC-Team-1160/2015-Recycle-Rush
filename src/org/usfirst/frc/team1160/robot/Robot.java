@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team1160.robot;
 
+import org.usfirst.frc.team1160.robot.commands.groups.AU;
 import org.usfirst.frc.team1160.robot.subsystems.*;
 import org.usfirst.frc.team1160.robot.subsystems.drive.DriveTrain;
 
@@ -32,6 +33,7 @@ public class Robot extends IterativeRobot {
 		dt = DriveTrain.getInstance();
 		air = Pistons.getInstance();
 		oi = new OI();
+		autonomousCommand = new AU();
         // instantiate the command used for the autonomous period
     }
 	
