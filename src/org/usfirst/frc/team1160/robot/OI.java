@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1160.robot;
 
+import org.usfirst.frc.team1160.robot.commands.*;
 import org.usfirst.frc.team1160.robot.commands.air.*;
 import org.usfirst.frc.team1160.robot.commands.drive.*;
 import org.usfirst.frc.team1160.robot.commands.groups.*;
@@ -15,7 +16,7 @@ public class OI implements RobotMap{
 	
 	
     private static Joystick d_stick, r_stick;
-    private JoystickButton autoA, autoB, autoC, mecDrive, upUp, upDown, midUp, midDown, grab, leggo, rotate;
+    private JoystickButton autoA, autoB, autoC, strobe, zcont, off, mecDrive, upUp, upDown, midUp, midDown, grab, leggo, rotate;
 
     
     /******************************************************************
@@ -37,15 +38,18 @@ public class OI implements RobotMap{
     private void tie(){
         upUp = new JoystickButton(d_stick, T_UP);
         upDown = new JoystickButton(d_stick, T_DOWN);
+        mecDrive = new JoystickButton(d_stick, MEC_DRIVE);
+        autoA = new JoystickButton(d_stick, AUTO_A);
+        autoB = new JoystickButton(d_stick, AUTO_B);
+        autoC = new JoystickButton(d_stick, AUTO_C);
+        rotate = new JoystickButton(d_stick, ROTATE);
+        off = new JoystickButton(d_stick, LIGHT_OFF);
+        strobe = new JoystickButton(d_stick, LIGHT_STROBE);
+        zcont = new JoystickButton(d_stick, LIGHT_Z);
         midUp = new JoystickButton(r_stick, M_UP);
         midDown = new JoystickButton(r_stick, M_DOWN);
-        mecDrive = new JoystickButton(d_stick, MEC_DRIVE);
         grab = new JoystickButton(r_stick, GRAB);
         leggo = new JoystickButton(r_stick, LEGGO);
-        autoA = new JoystickButton(r_stick, AUTO_A);
-        autoB = new JoystickButton(r_stick, AUTO_B);
-        autoC = new JoystickButton(r_stick, AUTO_C);
-        rotate = new JoystickButton(r_stick, ROTATE);
         check();
     }
     
@@ -65,6 +69,10 @@ public class OI implements RobotMap{
         midDown.whenPressed(new MidDown());
         grab.whenPressed(new Grab());
         leggo.whenPressed(new Release());
+        rotate.whenPressed(new RotateFrame(true, 1));
+        off.whenPressed(new LightOff());
+        strobe.whenPressed(new Strobe());
+        zcont.whenPressed(new ZControl());
     }
     
     

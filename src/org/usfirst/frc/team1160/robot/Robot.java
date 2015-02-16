@@ -22,6 +22,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	public static DriveTrain dt;
 	public static Pistons air;
+	public static Lights led;
 
     Command autonomousCommand;
 
@@ -32,8 +33,9 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		dt = DriveTrain.getInstance();
 		air = Pistons.getInstance();
-		oi = new OI();
+		led = Lights.getInstance();
 		autonomousCommand = new AU();
+		oi = new OI();
         // instantiate the command used for the autonomous period
     }
 	

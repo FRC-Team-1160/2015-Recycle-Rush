@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1160.robot.commands.drive;
+package org.usfirst.frc.team1160.robot.commands;
 
 import org.usfirst.frc.team1160.robot.Robot;
 
@@ -7,45 +7,32 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class DriveBackwards extends Command {
+public class ZControl extends Command {
 
-	private double distance;
-	
-    public DriveBackwards(double distance) {
-    	requires(Robot.dt);
-        this.distance = distance;
+    public ZControl() {
+    	requires(Robot.led);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.dt.reset();
-    	Robot.dt.enable();
-    	System.out.println("Moving backwards: " + distance + " meters");
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.dt.reverse(distance);
-//    	System.out.println(Robot.dt.blP.getPosition());
+    	Robot.led.zControl();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.dt.itDone();
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	System.out.println("finsihes");
-    	Robot.dt.reset();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.dt.blP.disable();
-    	Robot.dt.brP.disable();
-    	Robot.dt.flP.disable();
-    	Robot.dt.frP.disable();
     }
 }
