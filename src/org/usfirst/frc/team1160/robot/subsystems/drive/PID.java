@@ -56,6 +56,7 @@ public class PID extends PIDSubsystem implements RobotMap{
     
     protected void logEncoder(){
     	SmartDashboard.putNumber(this.getName() + ": PID: ", enc.pidGet());
+    	System.out.println(this.getName() + ": PID: " + enc.pidGet());
     }
     
     
@@ -78,7 +79,8 @@ public class PID extends PIDSubsystem implements RobotMap{
     protected void usePIDOutput(double output) {
     	SmartDashboard.putNumber(this.getName() + ": MOTOR: ", output*(.75));
     	this.logEncoder();
-    	motor.pidWrite(output*(.75));
+    	if(this.getName().equalsIgnoreCase("FrontRight"));
+    	motor.pidWrite(output*(.6));
     }
     
     public void initDefaultCommand() {}

@@ -57,8 +57,9 @@ public class OI implements RobotMap{
     /******************************************************************
      * Listens to the joystick to determine when a button is pressed
      * if a button is pressed, call the respective command
+     * @throws InterruptedException 
      ******************************************************************/
-    private void check(){   
+    private void check() {   
         mecDrive.whenPressed(new MecanumDrive());
         autoA.whenPressed(new AU());
         autoB.whenPressed(new BU());

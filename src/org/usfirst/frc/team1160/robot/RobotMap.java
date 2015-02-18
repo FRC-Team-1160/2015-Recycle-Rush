@@ -26,10 +26,10 @@ public interface RobotMap {
     public static final int PID_ENCODER_BL_B = 7;
     public static final int PID_ENCODER_FL_A = 4;
     public static final int PID_ENCODER_FL_B = 5;
-    public static final int PID_ENCODER_BR_A = 0;
-    public static final int PID_ENCODER_BR_B = 1;
-    public static final int PID_ENCODER_FR_A = 2;
-    public static final int PID_ENCODER_FR_B = 3;
+    public static final int PID_ENCODER_BR_A = 2;
+    public static final int PID_ENCODER_BR_B = 3;
+    public static final int PID_ENCODER_FR_A = 0;
+    public static final int PID_ENCODER_FR_B = 1;
     
     /*****************
      ***PNEUMATICS**** 
@@ -38,8 +38,8 @@ public interface RobotMap {
     public static final int MIDDLE_B = 7;
     public static final int UPPER_A_A = 1;
     public static final int UPPER_A_B = 6;
-    public static final int GRABBER_A = 5;
-    public static final int GRABBER_B = 2;
+    public static final int GRABBER_A = 2;
+    public static final int GRABBER_B = 5;
     public static final Value EXT = DoubleSolenoid.Value.kForward;
     public static final Value RET = DoubleSolenoid.Value.kReverse;
     
@@ -72,9 +72,11 @@ public interface RobotMap {
      ******************/    
     public static final double ABS_TOL = 0.5;
     public static final double DISTANCE_PER_PULSE = 0.005;
-    public static final double P = 1.5;
-    public static final double I = 0.0;
-    public static final double D = 4.5;
+    public static final double P = .4;
+    public static final double I = .01;
+    public static final double D = 11;
+    public static final double OUT_RANGE_L = -0.8;
+    public static final double OUT_RANGE_H = 0.8;
     
     
     /******************
@@ -87,10 +89,12 @@ public interface RobotMap {
     public static final double ATC = 17;			// - Position A to Clear Scoring
     public static final double BTC = 17;			// - Position B to Clear Scoring
     public static final double ETA = 5;				// - Edge to Auto Zone
-    public static final double BL_180 = 6.576;		// - Distance wheel turns to rotate 180
-    public static final double FR_180 = 5.13;		// - Distance wheel turns to rotate 180
-    public static final double BR_180 = 7.416;		// - Distance wheel turns to rotate 180
-    public static final double FL_180 = 6.576;		// - Distance wheel turns to rotate 180 \\ Not actual
+    public static final double BL_180 = 3.9625;		// - Distance wheel turns to rotate 180
+    public static final double FR_180 = 2.65;		// - Distance wheel turns to rotate 180
+    public static final double BR_180 = 3.485;		// - Distance wheel turns to rotate 180
+    public static final double FL_180 = 2.84625;		// - Distance wheel turns to rotate 180 \\ Not actual
+    public static final double T_GRAB = 200;
+    public static final double T_MID =  500;
     
     /******************
      ****LED Lights**** 

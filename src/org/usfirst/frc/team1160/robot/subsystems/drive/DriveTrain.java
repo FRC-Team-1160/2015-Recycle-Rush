@@ -34,14 +34,18 @@ public class DriveTrain extends Subsystem implements RobotMap{
         fr = new Talon(DT_MOTOR_FR);
         bl = new Talon(DT_MOTOR_BL);
         br = new Talon(DT_MOTOR_BR);
-        flEnc = new Encoder(PID_ENCODER_FL_A, PID_ENCODER_FL_B, false);
+        flEnc = new Encoder(PID_ENCODER_FL_A, PID_ENCODER_FL_B, true);
         frEnc = new Encoder(PID_ENCODER_FR_A, PID_ENCODER_FR_B, true);
-        blEnc = new Encoder(PID_ENCODER_BL_A, PID_ENCODER_BL_B, false);
-        brEnc = new Encoder(PID_ENCODER_BR_A, PID_ENCODER_BR_B, false);
+        blEnc = new Encoder(PID_ENCODER_BL_A, PID_ENCODER_BL_B, true);
+        brEnc = new Encoder(PID_ENCODER_BR_A, PID_ENCODER_BR_B, true);
         flP = new PID("FrontLeft", fl, flEnc);
         frP = new PID("FrontRight", fr, frEnc);
         blP = new PID("BackLeft", bl, blEnc);
         brP = new PID("BackRight", br, brEnc);
+        brP.setOutputRange(OUT_RANGE_L, OUT_RANGE_H);
+        blP.setOutputRange(OUT_RANGE_L, OUT_RANGE_H);
+        flP.setOutputRange(OUT_RANGE_L, OUT_RANGE_H);
+        frP.setOutputRange(OUT_RANGE_L, OUT_RANGE_H);
     }
 
     

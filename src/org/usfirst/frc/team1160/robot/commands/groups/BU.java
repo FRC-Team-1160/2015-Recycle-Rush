@@ -12,13 +12,19 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class BU extends CommandGroup implements RobotMap{
     
     public  BU() {
-    	addSequential(new Grab());
+    	/*addSequential(new Grab());
+    	wait(T_GRAB);
     	addSequential(new MidUp());
+    	wait(T_MID);
     	addSequential(new DriveForward(BTT));
     	addSequential(new Release());
+    	wait(T_GRAB);
     	addSequential(new MidDown());
+    	wait(T_MID);
     	addSequential(new Grab());
+    	wait(T_GRAB);
     	addSequential(new MidUp());
+    	wait(T_MID);*/
     	addSequential(new RotateFrame(false, 1));
     	addSequential(new DriveForward(STE));
     	addSequential(new RotateFrame(false, 1));
