@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1160.robot.subsystems;
 
+import org.usfirst.frc.team1160.robot.OI;
 import org.usfirst.frc.team1160.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.Compressor;
@@ -61,26 +62,52 @@ public class Pistons extends Subsystem implements RobotMap{
      ******************************************************************/
     public void midUp(){
     	middle.set(RET);
+    	OI.getLaunchpad().setOutput(M_INDICATOR, true);
     }
     
     public void midDown(){
     	middle.set(EXT);
+    	OI.getLaunchpad().setOutput(M_INDICATOR, false);
     }
     
     public void topUp(){
     	upperA.set(RET);
+    	OI.getLaunchpad().setOutput(T_INDICATOR, true);
     }
     
     public void topDown(){
     	upperA.set(EXT);
+    	OI.getLaunchpad().setOutput(T_INDICATOR, false);
     }
     
     public void grab(){
     	grabberA.set(EXT);
+    	OI.getLaunchpad().setOutput(G_INDICATOR, true);
     }
     
     public void release(){
     	grabberA.set(RET);
+    	OI.getLaunchpad().setOutput(G_INDICATOR, false);
+    }
+    
+    public void toggler(DoubleSolenoid sol){
+    	if(sol.get() == EXT)
+    		sol.set(RET);
+    	else{
+    		sol.set(EXT);
+    	}
+    }
+    
+    public DoubleSolenoid getTop(){
+    	return upperA;
+    }
+    
+    public DoubleSolenoid getMid(){
+    	return middle;
+    }
+    
+    public DoubleSolenoid getGrab(){
+    	return grabberA;
     }
 
 

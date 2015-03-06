@@ -6,6 +6,7 @@ import org.usfirst.frc.team1160.robot.commands.drive.MecanumDrive;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -19,6 +20,7 @@ public class DriveTrain extends Subsystem implements RobotMap{
     protected final Encoder flEnc, frEnc, blEnc, brEnc;
     private double maxV, flT, frT, blT, brT;
     public PID flP, frP, brP, blP;
+    private Timer timer;
     
     
     /******************************************************************
@@ -46,6 +48,7 @@ public class DriveTrain extends Subsystem implements RobotMap{
         blP.setOutputRange(OUT_RANGE_L, OUT_RANGE_H);
         flP.setOutputRange(OUT_RANGE_L, OUT_RANGE_H);
         frP.setOutputRange(OUT_RANGE_L, OUT_RANGE_H);
+        timer = new Timer();
     }
 
     
@@ -135,6 +138,14 @@ public class DriveTrain extends Subsystem implements RobotMap{
     	brP.enable();
     	flP.enable();
     	frP.enable();
+    }
+    
+    public boolean waitForComplete(double milli){
+    	timer.start();
+    	timer.reset();
+    	while(timer.get() <= milli)
+    		return false;
+    	return true;
     }
     
     

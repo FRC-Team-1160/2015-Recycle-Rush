@@ -46,19 +46,15 @@ public interface RobotMap {
     /*****************
      **JOYSTICKPORTS** 
      *****************/
+    public static final int LAUNCHPAD = 0;
     public static final int JOY_DRIVE = 1;
     public static final int JOY_ROTATE = 2;
     
     /*****************
      *****BUTTONS***** 
      *****************/
+    //DRIVE STICK
     public static final int MEC_DRIVE = 1;
-    public static final int T_UP = 4;
-    public static final int T_DOWN = 5;
-    public static final int M_UP = 4;
-    public static final int M_DOWN = 5;
-    public static final int GRAB = 1;
-    public static final int LEGGO = 2;
     public static final int AUTO_A= 6;
     public static final int AUTO_B = 7;
     public static final int AUTO_C = 10;
@@ -66,6 +62,17 @@ public interface RobotMap {
     public static final int LIGHT_STROBE = 9;
     public static final int LIGHT_OFF = 3;
     public static final int ROTATE = 11;
+    //ROTATE STICK
+    public static final int T_UP = 4;
+    public static final int T_DOWN = 5;
+    public static final int M_UP = 4;
+    public static final int M_DOWN = 5;
+    public static final int GRAB = 1;
+    public static final int LEGGO = 2;
+    //LAUNCHPAD BUTTONS
+    public static final int M_TOGGLE = 1;
+    public static final int T_TOGGLE = 2;
+    public static final int G_TOGGLE = 3;
 
     /******************
      **PID CONTROLLER** 
@@ -94,10 +101,13 @@ public interface RobotMap {
     public static final double BR_180 = 3.485;		// - Distance wheel turns to rotate 180
     public static final double FL_180 = 2.84625;		// - Distance wheel turns to rotate 180 \\ Not actual
     public static final double T_GRAB = 200;
-    public static final double T_MID =  500;
+    public static final double T_MID =  400;
     
     /******************
      ****LED Lights**** 
      ******************/
-    public static final int LIGHT_PORT = 5;
+    public static final int LIGHT_PORT = 0;
+    public static final int M_INDICATOR = 1;
+    public static final int T_INDICATOR = 2;
+    public static final int G_INDICATOR = 3;
 }
