@@ -40,5 +40,13 @@ public class CU extends CommandGroup implements RobotMap{
     	addSequential(new RotateFrame(false, 1));
     	
     	addSequential(new DriveForward(STA));
+    	
+    	addSequential(new MidDown());
+    	addSequential(new Pause(T_MID));
+    	
+    	addSequential(new Release());
+    	addSequential(new Pause(T_GRAB));
+    	
+    	addSequential(new DriveForward(-CLEAR));
     }
 }

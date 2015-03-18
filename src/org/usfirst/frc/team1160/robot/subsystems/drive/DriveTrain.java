@@ -5,6 +5,7 @@ import org.usfirst.frc.team1160.robot.RobotMap;
 import org.usfirst.frc.team1160.robot.commands.drive.MecanumDrive;
 
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -18,6 +19,7 @@ public class DriveTrain extends Subsystem implements RobotMap{
     private static DriveTrain instance;
     protected final Talon fl, fr, bl, br;
     protected final Encoder flEnc, frEnc, blEnc, brEnc;
+    private final PowerDistributionPanel pdp;
     private double maxV, flT, frT, blT, brT;
     public PID flP, frP, brP, blP;
     private Timer timer;
@@ -32,6 +34,7 @@ public class DriveTrain extends Subsystem implements RobotMap{
     private DriveTrain() {
     	SmartDashboard.putNumber("kP", P);
     	SmartDashboard.putNumber("kD", D);
+    	pdp = new PowerDistributionPanel();
         fl = new Talon(DT_MOTOR_FL);
         fr = new Talon(DT_MOTOR_FR);
         bl = new Talon(DT_MOTOR_BL);
@@ -73,10 +76,10 @@ public class DriveTrain extends Subsystem implements RobotMap{
      * http://thinktank.wpi.edu/resources/346/ControllingMecanumDrive.pdf
      ******************************************************************/
     public void mecanumDrive() {
-        flT = OI.getDriveStick().getMagnitude() * Math.sin(OI.getDriveStick().getDirectionRadians() + (Math.PI / 4)) + OI.getRotateStick().getX();
-        frT = OI.getDriveStick().getMagnitude() * Math.cos(OI.getDriveStick().getDirectionRadians() + (Math.PI / 4)) - OI.getRotateStick().getX();
-        blT = OI.getDriveStick().getMagnitude() * Math.cos(OI.getDriveStick().getDirectionRadians() + (Math.PI / 4)) + OI.getRotateStick().getX();
-        brT = OI.getDriveStick().getMagnitude() * Math.sin(OI.getDriveStick().getDirectionRadians() + (Math.PI / 4)) - OI.getRotateStick().getX();
+        flT = OI.getDriveStick().getFancyMagnitude() * Math.sin(OI.getDriveStick().getDirectionRadians() + (Math.PI / 4)) + OI.getRotateStick().getFancyX();
+        frT = OI.getDriveStick().getFancyMagnitude() * Math.cos(OI.getDriveStick().getDirectionRadians() + (Math.PI / 4)) - OI.getRotateStick().getFancyX();
+        blT = OI.getDriveStick().getFancyMagnitude() * Math.cos(OI.getDriveStick().getDirectionRadians() + (Math.PI / 4)) + OI.getRotateStick().getFancyX();
+        brT = OI.getDriveStick().getFancyMagnitude() * Math.sin(OI.getDriveStick().getDirectionRadians() + (Math.PI / 4)) - OI.getRotateStick().getFancyX();
         
         maxV = Math.max(
         		Math.max(Math.abs(flT), Math.abs(frT)), 
@@ -94,12 +97,21 @@ public class DriveTrain extends Subsystem implements RobotMap{
         bl.set(-blT);
         br.set(brT);
         
+        logPower();
+        
         flP.logEncoder();
         frP.logEncoder();
         blP.logEncoder();
         brP.logEncoder();
+    
     }
     
+    public void logPower(){
+    	SmartDashboard.putNumber("FrontLeft Power: ", pdp.getCurrent(P_MOTOR_FL));
+    	SmartDashboard.putNumber("BackLeft Power: ", pdp.getCurrent(P_MOTOR_BL));
+    	SmartDashboard.putNumber("FrontRight Power: ", pdp.getCurrent(P_MOTOR_FR));
+    	SmartDashboard.putNumber("BackRight Power: ", pdp.getCurrent(P_MOTOR_BR));
+    }
     
     /******************************************************************
      * Used with drive commands
@@ -140,12 +152,19 @@ public class DriveTrain extends Subsystem implements RobotMap{
     	frP.enable();
     }
     
-    public boolean waitForComplete(double milli){
+    public void startTime(){
+    	System.out.println("timer started");
     	timer.start();
     	timer.reset();
-    	while(timer.get() <= milli)
+    }
+    
+    public boolean waitForComplete(double milli){
+    	System.out.println("time currently: " + timer.get() + " - waiting for: " + milli);
+    	if(timer.get() <= milli)
     		return false;
-    	return true;
+    	else{
+    		return true;
+    	}
     }
     
     

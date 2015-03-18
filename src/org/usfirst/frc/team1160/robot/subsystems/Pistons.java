@@ -62,39 +62,42 @@ public class Pistons extends Subsystem implements RobotMap{
      ******************************************************************/
     public void midUp(){
     	middle.set(RET);
-    	OI.getLaunchpad().setOutput(M_INDICATOR, true);
+    	OI.getLaunchpad().setOutput(M_INDICATOR, false);
     }
     
     public void midDown(){
     	middle.set(EXT);
-    	OI.getLaunchpad().setOutput(M_INDICATOR, false);
+    	OI.getLaunchpad().setOutput(M_INDICATOR, true);
     }
     
     public void topUp(){
     	upperA.set(RET);
-    	OI.getLaunchpad().setOutput(T_INDICATOR, true);
+    	OI.getLaunchpad().setOutput(T_INDICATOR, false);
     }
     
     public void topDown(){
     	upperA.set(EXT);
-    	OI.getLaunchpad().setOutput(T_INDICATOR, false);
+    	OI.getLaunchpad().setOutput(T_INDICATOR, true);
     }
     
     public void grab(){
     	grabberA.set(EXT);
-    	OI.getLaunchpad().setOutput(G_INDICATOR, true);
+    	OI.getLaunchpad().setOutput(G_INDICATOR, false);
     }
     
     public void release(){
     	grabberA.set(RET);
-    	OI.getLaunchpad().setOutput(G_INDICATOR, false);
+    	OI.getLaunchpad().setOutput(G_INDICATOR, true);
     }
     
-    public void toggler(DoubleSolenoid sol){
-    	if(sol.get() == EXT)
+    public void toggler(DoubleSolenoid sol, int light){
+    	if(sol.get() == EXT){
     		sol.set(RET);
+    		OI.getLaunchpad().setOutput(light, true);
+    	}
     	else{
     		sol.set(EXT);
+        	OI.getLaunchpad().setOutput(light, false);
     	}
     }
     

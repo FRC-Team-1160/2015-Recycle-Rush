@@ -11,15 +11,17 @@ import edu.wpi.first.wpilibj.command.Command;
 public class Switch extends Command {
 
 	DoubleSolenoid sol;
+	int light;
 	
-    public Switch(DoubleSolenoid sol) {
+    public Switch(DoubleSolenoid sol, int light) {
     	requires(Robot.air);
     	this.sol = sol;
+    	this.light = light;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.air.toggler(sol);
+    	Robot.air.toggler(sol, light);
     }
 
     // Called repeatedly when this Command is scheduled to run

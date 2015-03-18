@@ -26,7 +26,7 @@ public interface RobotMap {
     public static final int PID_ENCODER_BL_B = 7;
     public static final int PID_ENCODER_FL_A = 4;
     public static final int PID_ENCODER_FL_B = 5;
-    public static final int PID_ENCODER_BR_A = 0
+    public static final int PID_ENCODER_BR_A = 0;
     public static final int PID_ENCODER_BR_B = 1;
     public static final int PID_ENCODER_FR_A = 2;
     public static final int PID_ENCODER_FR_B = 3;
@@ -106,7 +106,7 @@ public interface RobotMap {
     /******************
      ****LED Lights**** 
      ******************/
-    public static final int LIGHT_PORT = 0;
+    public static final int LIGHT_PORT = 5;
     public static final int M_INDICATOR = 1;
     public static final int T_INDICATOR = 2;
     public static final int G_INDICATOR = 3;

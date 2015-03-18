@@ -31,6 +31,11 @@ public interface RobotMap {
     public static final int PID_ENCODER_FR_A = 0;
     public static final int PID_ENCODER_FR_B = 1;
     
+    public static final int P_MOTOR_BL = 13;
+    public static final int P_MOTOR_BR = 14;
+    public static final int P_MOTOR_FL = 12;
+    public static final int P_MOTOR_FR = 15;
+    
     /*****************
      ***PNEUMATICS**** 
      *****************/    
@@ -70,18 +75,18 @@ public interface RobotMap {
     public static final int GRAB = 1;
     public static final int LEGGO = 2;
     //LAUNCHPAD BUTTONS
-    public static final int M_TOGGLE = 1;
-    public static final int T_TOGGLE = 2;
-    public static final int G_TOGGLE = 3;
+    public static final int M_TOGGLE = 4;
+    public static final int T_TOGGLE = 3;
+    public static final int G_TOGGLE = 2;//mid grab / top mid / bot top
 
     /******************
      **PID CONTROLLER** 
      ******************/    
-    public static final double ABS_TOL = 0.5;
+    public static final double ABS_TOL = 1;
     public static final double DISTANCE_PER_PULSE = 0.005;
     public static final double P = .4;
-    public static final double I = .01;
-    public static final double D = 11;
+    public static final double I = .1;
+    public static final double D = 9;
     public static final double OUT_RANGE_L = -0.8;
     public static final double OUT_RANGE_H = 0.8;
     
@@ -93,21 +98,22 @@ public interface RobotMap {
     public static final double BTT = 2;         	// - Bin to Tote
     public static final double STE = 4.5;       	// - Starting to Edge (Of Score)
     public static final double STA = 9.5;			// - Starting to Auto Zone
-    public static final double ATC = 17;			// - Position A to Clear Scoring
-    public static final double BTC = 17;			// - Position B to Clear Scoring
+    public static final double ATC = 15;			// - Position A to Clear Scoring
+    public static final double BTC = 7.25;			// - Position B to Clear Scoring
     public static final double ETA = 5;				// - Edge to Auto Zone
-    public static final double BL_180 = 3.9625;		// - Distance wheel turns to rotate 180
-    public static final double FR_180 = 2.65;		// - Distance wheel turns to rotate 180
-    public static final double BR_180 = 3.485;		// - Distance wheel turns to rotate 180
-    public static final double FL_180 = 2.84625;		// - Distance wheel turns to rotate 180 \\ Not actual
-    public static final double T_GRAB = 200;
-    public static final double T_MID =  400;
+    public static final double BL_180 = 6;			
+    public static final double FR_180 = 6;			
+    public static final double BR_180 = 6;			
+    public static final double FL_180 = 6;			
+    public static final double T_GRAB = .400;
+    public static final double T_MID =  1.2;
+    public static final double CLEAR = 2.25;
     
     /******************
      ****LED Lights**** 
      ******************/
-    public static final int LIGHT_PORT = 0;
-    public static final int M_INDICATOR = 1;
-    public static final int T_INDICATOR = 2;
-    public static final int G_INDICATOR = 3;
+    public static final int LIGHT_PORT = 5;
+    public static final int M_INDICATOR = 3;
+    public static final int T_INDICATOR = 1;
+    public static final int G_INDICATOR = 2;
 }

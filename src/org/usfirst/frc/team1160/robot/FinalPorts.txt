@@ -4,6 +4,20 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 
 /**
+ * BOTTOM LED CURRENTLY INDICATES BOTTOM (3)
+ * MIDDLE LED CURRENTLY INDICATES GRAB (1)
+ * TOP LED CURRENTLY INDICATES MIDDLE (2)
+ * CHANGE BOT LED TO GRAB INDICATOR - (1)
+ * CHANGE MIDDLE LED TO MID INDICATOR - (2) 
+ * CHANGE TOP LED TO TOP INDICATOR - (3)
+ * 2>3>1
+ *
+    public static final int M_INDICATOR = 3;
+    public static final int T_INDICATOR = 1;
+    public static final int G_INDICATOR = 2;
+ 
+ 
+ * grab is ledtop | mid is ledbot | 
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
  * the wiring easier and significantly reduces the number of magic numbers
@@ -106,7 +120,7 @@ public interface RobotMap {
     /******************
      ****LED Lights**** 
      ******************/
-    public static final int LIGHT_PORT = 0;
+    public static final int LIGHT_PORT = 5;
     public static final int M_INDICATOR = 1;
     public static final int T_INDICATOR = 2;
     public static final int G_INDICATOR = 3;
