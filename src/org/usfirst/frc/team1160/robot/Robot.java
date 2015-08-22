@@ -1,7 +1,8 @@
 
 package org.usfirst.frc.team1160.robot;
 
-import org.usfirst.frc.team1160.robot.commands.groups.CU;
+import org.usfirst.frc.team1160.robot.commands.drive.DriveForward;
+import org.usfirst.frc.team1160.robot.commands.groups.CanU;
 import org.usfirst.frc.team1160.robot.subsystems.Lights;
 import org.usfirst.frc.team1160.robot.subsystems.Pistons;
 import org.usfirst.frc.team1160.robot.subsystems.drive.DriveTrain;
@@ -35,7 +36,7 @@ public class Robot extends IterativeRobot {
     	dt = DriveTrain.getInstance();
 		air = Pistons.getInstance();
 		led = Lights.getInstance();
-		autonomousCommand = new CU();
+		autonomousCommand = new CanU();
 		
 		
 		oi = new OI();

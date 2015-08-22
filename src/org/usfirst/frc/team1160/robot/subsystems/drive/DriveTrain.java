@@ -84,7 +84,7 @@ public class DriveTrain extends Subsystem implements RobotMap{
         maxV = Math.max(
         		Math.max(Math.abs(flT), Math.abs(frT)), 
         		Math.max(Math.abs(blT), Math.abs(brT)));
-        
+         
         if(maxV>1){
         	flT = flT / maxV;
         	frT = frT / maxV;
@@ -119,7 +119,7 @@ public class DriveTrain extends Subsystem implements RobotMap{
      * Important for the isFinished() method in commands
      ******************************************************************/
     public boolean itDone(){
-    	return (flP.finished() && frP.finished() && blP.finished() && brP.finished());
+    	return (frP.finished() && blP.finished() && brP.finished());
     }
     
     

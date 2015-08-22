@@ -14,40 +14,21 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 /**
  *
  */
-public class CU extends CommandGroup implements RobotMap{
+public class CanU extends CommandGroup implements RobotMap{
     
-    public  CU() {
+    public  CanU() {
+    	
     	addSequential(new Grab());
-    	addSequential(new Pause(T_GRAB));
+    	addSequential(new Pause(T_GRAB));   	
     	
     	addSequential(new MidUp());
     	addSequential(new Pause(T_MID));
     	
-    	addSequential(new DriveForward(BTT));
-    
-    	addSequential(new Release());
-    	addSequential(new Pause(T_GRAB));
-    	
-    	addSequential(new MidDown());
-    	addSequential(new Pause(T_MID));
-    	
-    	addSequential(new Grab());
-    	addSequential(new Pause(T_GRAB));
-    	
-    	addSequential(new MidUp());
-    	addSequential(new Pause(T_MID));
-    	
-    	
-    	addSequential(new RotateFrame(false, 1));
-    	
+    	addSequential(new RotateFrame(false, 1));    	
     	addSequential(new DriveForward(STA));
-    
-    	addSequential(new MidDown());
-    	addSequential(new Pause(T_MID));
     	
-    	addSequential(new Release());
-    	addSequential(new Pause(T_GRAB));
     	
-    	addSequential(new DriveForward(-CLEAR));
+    	
     }
+    
 }

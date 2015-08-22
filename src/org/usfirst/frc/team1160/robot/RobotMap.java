@@ -97,7 +97,7 @@ public interface RobotMap {
      ******************/
     public static final double BTT = 2;         	// - Bin to Tote
     public static final double STE = 4.5;       	// - Starting to Edge (Of Score)
-    public static final double STA = 9.5;			// - Starting to Auto Zone
+    public static final double STA = 10;			// - Starting to Auto Zone
     public static final double ATC = 15;			// - Position A to Clear Scoring
     public static final double BTC = 7.25;			// - Position B to Clear Scoring
     public static final double ETA = 5;				// - Edge to Auto Zone

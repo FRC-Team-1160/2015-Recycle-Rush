@@ -14,7 +14,7 @@ public class FancyJoystick extends Joystick {
 	}
 	
 	public double getFancyMagnitude(){
-		return (Math.pow(super.getMagnitude(), 3)*4);
+		return (Math.pow(super.getMagnitude(), 3)*3);
 	}
 	
 	
